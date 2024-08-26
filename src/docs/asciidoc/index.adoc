@@ -28,3 +28,20 @@ include::{snippets}/post-create/request-fields.adoc[]
 
 === 응답
 include::{snippets}/post-create/http-response.adoc[]
+
+== 글 수정
+
+=== 요청
+include::{snippets}/post-edit/http-request.adoc[]
+
+include::{snippets}/post-edit/path-parameters.adoc[]
+
+=== 응답
+include::{snippets}/post-edit/http-response.adoc[]
+
+
+== 글 삭제
+
+
+
+== 글 전체 조회

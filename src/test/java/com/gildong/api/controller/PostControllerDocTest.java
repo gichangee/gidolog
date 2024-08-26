@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gildong.api.domain.Post;
 import com.gildong.api.repository.PostRepository;
 import com.gildong.api.request.PostCreate;
+import com.gildong.api.request.PostEdit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,7 @@ import org.springframework.restdocs.request.RequestDocumentation;
 import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -83,6 +85,7 @@ public class PostControllerDocTest {
 
         //expected
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/posts")
+                        .header("authorization", "hodolman")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(json))
@@ -96,4 +99,46 @@ public class PostControllerDocTest {
                         )
                 ));
     }
+
+    @Test
+    @DisplayName("글 수정")
+    void test3() throws Exception {
+
+        Post post = Post.builder()
+                .title("호돌맨")
+                .content("반포자이")
+                .build();
+
+
+        postRepository.save(post);
+
+        PostEdit postEdit = PostEdit.builder()
+                .title("호돌걸")
+                .content("반포자이")
+                .build();
+
+        mockMvc.perform(RestDocumentationRequestBuilders.patch("/posts/{postId}",post.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(postEdit))
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andDo(document("post-edit", RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("postId").description("게시글 ID")
+                )
+        ));
+    }
+
+    @Test
+    @DisplayName("글 삭제")
+    void test4() throws Exception {
+
+    }
+
+    @Test
+    @DisplayName("글 전체 조회")
+    void test5() throws Exception {
+
+    }
+
 }
