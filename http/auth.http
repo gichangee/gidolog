@@ -7,3 +7,10 @@ Content-Type: application/json
   "email" : "parkgc0504@gmail.com",
   "password" : "dpqls"
 }
+
+### 인증 페이지 요청
+
+GET http://localhost:8080/foo
+Content-Type: application/json
+Cookie: SESSION = 3a61429f-c950-465e-b428-8d23c0b6f222
+### Authorization: fccaef27-a87a-4eb9-8701-a4ed17f2169c
