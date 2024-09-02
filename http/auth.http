@@ -12,5 +12,5 @@ Content-Type: application/json
 
 GET http://localhost:8080/foo
 Content-Type: application/json
-Cookie: SESSION = 3a61429f-c950-465e-b428-8d23c0b6f222
+Cookie: SESSION =f7bb89bb-acbc-4bc2-9032-116365e56f06
 ### Authorization: fccaef27-a87a-4eb9-8701-a4ed17f2169c
